@@ -48,7 +48,7 @@ mutate(spend_data,
   average_spent = amount / individuals)
 
 
-# Group 'spend_data' by 'merchant_class', and then summarise the total money spent at each merchant by summing the 'amount'. View the result and interpret the findings.
+# Group 'spend_data' by 'merchant', and then summarise the total money spent at each merchant_class by summing the 'amount'. View the result and interpret the findings.
 View(spend_data %>% 
        select(amount, merchant, merchant_class) %>% 
         group_by(merchant) %>% 
