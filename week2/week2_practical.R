@@ -15,7 +15,7 @@ df[mrownum,] %>% print
 
 # challenge 1
 # calculate the range in user scores yourself over this dataset.
-range(df$user_review) %>% print
+df$user_review %>% range %>%  print
 df$user_review %>% min %>% print
 df$user_review %>% max %>% print
 
@@ -32,7 +32,7 @@ View(sort(-table(df$user_review)))
 thresehold <- quantile(df$meta_score, c(0.99))
 View(df[df$meta_score >= thresehold, ] %>% 
        arrange(meta_score) %>% 
-       mutate(, threshold = thresehold))
+       mutate(threshold = thresehold))
 
 
 ggplot(df, aes(x=meta_score))+geom_histogram()
@@ -73,18 +73,12 @@ df %>%
 
 # challege 6
 #  Imagine a threshold for a critic score which is so high that only 1% of games would exceed this overall score. Use R’s quantile function to estimate this value for each platform.
-df_grp_by_plf <- (df %>% 
-                group_by(platform) %>% 
-                summarise(mean_meta = mean(meta_score)))
-View(df_grp_by_plf)
-threshold <- quantile(df_grp_by_plf$mean_meta, 0.99)
-df_grp_by_plf %>% 
-  filter(, mean_meta >= quantile(mean_meta, 0.99)) %>%
+df %>% 
+  group_by(platform) %>% 
+  summarise(mean_meta = mean(meta_score)) %>% 
+  filter(mean_meta >= quantile(mean_meta, c(0.99))) %>% 
   print
 
-# ?question
-# can I abbreiviate above codes into one pipe code?
-# I tried, but how can I affix summarse ~ filter part. mean_meta is not existent
 
 
 # challenge 7
