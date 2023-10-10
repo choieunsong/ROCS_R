@@ -49,17 +49,10 @@ cat("Standard Deviation of games per year:", standard_num_games,"\n")
 
 # challenge 4
 # Produce a visualisation of the total number of games per year. Stretch Challenge: integrate some kind of visualisation of central tendency within this plot. For example, you could try to replicate the bar plot below, which integrates a dashed line showing mean games per year:
-#ggplot(df_year_summary,
-    #   aes(x = release_year,
-   #        y = n)) +
-  #geom_bar(fill="#58ded0", stat="identity")+
- # geom_hline(yintercept=mean_num_games, linetype="dashed") +
-#  labs(title="Number of Games Per Year", x="Year", y="Number of Games")
-ggplot(df_year_summary) +
-  geom_bar(mapping=aes(y=n, x=release_year),fill="#58ded0", stat="identity")+
-  geom_hline(yintercept=mean_num_games, linetype="dashed") +
-  labs(title="Number of Games Per Year", x="Year", y="Number of Games")+
-  theme_minimal()
+ggplot(df_year_summary, aes(x=release_year %>% as.numeric, y=n)) +
+  geom_col(fill="#58ded0")+
+  labs(title="Number of Games Per Year", x="Year", y="Number of Games") +
+  geom_hline(yintercept=mean_num_games, linetype="dashed")
 
 
 # challenge 5
@@ -95,6 +88,7 @@ cor.test(df$meta_score, df$timestamp %>% as.numeric,
 
 plot(df$meta_score, df$timestamp)
 
+y = ax + b
 
 # challenge 7
 # 1. Are video games becoming more critically acclaimed over time?
